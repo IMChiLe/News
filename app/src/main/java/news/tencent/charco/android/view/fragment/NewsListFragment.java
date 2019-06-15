@@ -1,8 +1,10 @@
 package news.tencent.charco.android.view.fragment;
 
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.TextView;
@@ -12,10 +14,18 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 import cn.jzvd.JZMediaManager;
 import cn.jzvd.JZUtils;
 import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerManager;
+import news.tencent.charco.android.New;
 import news.tencent.charco.android.R;
 import news.tencent.charco.android.base.BaseFragment;
 import news.tencent.charco.android.utils.AnimationUtil;
@@ -24,6 +34,9 @@ import news.tencent.charco.android.view.activity.AlbumActivity;
 import news.tencent.charco.android.view.activity.WebViewActivity;
 import news.tencent.charco.android.view.adapter.NewsListAdapter;
 import news.tencent.charco.android.widget.popup.LoseInterestPopup;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created 18/7/19 16:39
@@ -48,13 +61,15 @@ public class NewsListFragment extends BaseFragment implements RecyclerView.OnChi
 
     @Override
     public void initView(View rootView) {
+        ArrayList<New> hotTitle=getHotTitle();
+        SystemClock.sleep(2000);
         mSmartRefreshLayout = findViewById(R.id.refreshLayout);
         mSmartRefreshLayout.setOnRefreshListener(this);
         mSmartRefreshLayout.setEnableOverScrollBounce(false);//是否启用越界回弹
         mSmartRefreshLayout.setEnableOverScrollDrag(false);
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-        mAdapter = new NewsListAdapter(null);
+        mAdapter = new NewsListAdapter(null,hotTitle);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnChildAttachStateChangeListener(this);
         mTvTip = findViewById(R.id.tv_tip);
@@ -142,5 +157,42 @@ public class NewsListFragment extends BaseFragment implements RecyclerView.OnChi
     @Override
     public void onLoseInterestListener(int poor_quality, int repeat, String source, int position) {
         ToastUtil.showToast("position = "+position);
+    }
+
+    public ArrayList<New> getHotTitle(){
+        final ArrayList<New> rlist = new ArrayList<New>();
+        //向服务器请求数据
+        //final String path="http://10.0.2.2:8080/SelectNewTypeZero";
+        final String path="http://106.14.167.49:8080/news/SelectNewTypeZero";
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder().url(path).build();
+                    Response response=client.newCall(request).execute();
+                    parseJsonWithJsonObjectWithReMen(response,rlist);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        return rlist;
+    }
+    public void parseJsonWithJsonObjectWithReMen(Response response,ArrayList<New> rlist) throws IOException {
+        String responseData=response.body().string();
+        try{
+            JSONArray jsonArray=new JSONArray(responseData);
+            for(int i=0;i<jsonArray.length();i++)
+            {
+                JSONObject jsonObject=jsonArray.getJSONObject(i);
+                String title = jsonObject.getString("title");
+                New aNew=new New();
+                aNew.setTitle(title);
+                rlist.add(aNew);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

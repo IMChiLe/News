@@ -8,6 +8,7 @@ public class New {
         newtype 新闻类型
         title 新闻标题
         dateofpublication 发布日期
+        text 新闻内容
          */
     private String account;
     private String videourl;
@@ -15,16 +16,18 @@ public class New {
     private int newtype;
     private String title;
     private String dateofpublication;
+    private String text;
     public New() {
     }
 
-    public New(String account, String videourl, String author,int newtype,String title,String dateofpublication) {
+    public New(String account, String videourl, String author,int newtype,String title,String dateofpublication,String text) {
         this.account = account;
         this.videourl = videourl;
         this.author = author;
         this.newtype = newtype;
         this.title=title;
         this.dateofpublication = dateofpublication;
+        this.text=text;
     }
 
     public String getAccount() {
@@ -73,5 +76,13 @@ public class New {
 
     public void setDateofpublication(String dateofpublication) {
         this.dateofpublication = dateofpublication;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }
