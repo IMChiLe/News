@@ -8,21 +8,26 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="140dp">
+            android:layout_height="140dp"
+            android:background="@drawable/login">
 
             <Button
-                android:text="Login For Wechat"
+                android:id="@+id/logins"
+                android:text="login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
-            <Button
-                android:text="Login for qq"
-                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"/>
+            <TextView
+                android:layout_below="@+id/logins"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
-        </LinearLayout>
+                android:text="一键登陆"/>
+        </RelativeLayout>
 
 
     </LinearLayout>

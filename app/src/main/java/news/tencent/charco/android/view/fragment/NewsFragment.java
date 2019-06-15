@@ -80,6 +80,7 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener, 
         mSearchAdapter.setOnItemClickListener(this);
     }
 
+    //获取arrays.xml中存放的数据
     @Override
     protected void loadData() {
         channels = getResources().getStringArray(R.array.channel);
@@ -159,6 +160,7 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener, 
         mCommonNavigator.setSkimOver(true);
         mCommonNavigator.setAdapter(new CommonNavigatorAdapter() {
 
+            //顶头列表放入
             @Override
             public int getCount() {
                 return channels.length;

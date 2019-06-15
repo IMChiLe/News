@@ -52,7 +52,6 @@ public class MainActivity extends BaseActivity implements BottomBarLayout.OnItem
 
         mBottomBarLayout.setViewPager(mViewPager);
         mBottomBarLayout.setOnItemSelectedListener(this);
-
     }
 
 
