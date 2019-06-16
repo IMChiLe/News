@@ -9,6 +9,7 @@ public class New {
         title 新闻标题
         dateofpublication 发布日期
         text 新闻内容
+        img 图片路径
          */
     private String account;
     private String videourl;
@@ -17,6 +18,7 @@ public class New {
     private String title;
     private String dateofpublication;
     private String text;
+    private String img;
     public New() {
     }
 
@@ -84,5 +86,13 @@ public class New {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

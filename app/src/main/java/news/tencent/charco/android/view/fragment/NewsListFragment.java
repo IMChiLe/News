@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import cn.jzvd.JZMediaManager;
 import cn.jzvd.JZUtils;
@@ -34,8 +35,12 @@ import news.tencent.charco.android.view.activity.AlbumActivity;
 import news.tencent.charco.android.view.activity.WebViewActivity;
 import news.tencent.charco.android.view.adapter.NewsListAdapter;
 import news.tencent.charco.android.widget.popup.LoseInterestPopup;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -53,7 +58,7 @@ public class NewsListFragment extends BaseFragment implements RecyclerView.OnChi
     private SmartRefreshLayout mSmartRefreshLayout;
     private TextView mTvTip;
     private NewsListAdapter mAdapter;
-
+    private int key;
     @Override
     protected int provideContentViewId() {
         return R.layout.fragment_news_list;
@@ -62,14 +67,20 @@ public class NewsListFragment extends BaseFragment implements RecyclerView.OnChi
     @Override
     public void initView(View rootView) {
         ArrayList<New> hotTitle=getHotTitle();
-        SystemClock.sleep(2000);
+        ArrayList<New> list = getDataAsync();
+        list.add(0,new New());
+        SystemClock.sleep(5000);
+//        Log.i("kwwl","LIST.SIZE=="+list.size());
+//        for (New n: list) {
+//            Log.i("kwwl","n=="+n.getTitle());
+//        }
         mSmartRefreshLayout = findViewById(R.id.refreshLayout);
         mSmartRefreshLayout.setOnRefreshListener(this);
         mSmartRefreshLayout.setEnableOverScrollBounce(false);//是否启用越界回弹
         mSmartRefreshLayout.setEnableOverScrollDrag(false);
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-        mAdapter = new NewsListAdapter(null,hotTitle);
+        mAdapter = new NewsListAdapter(null,hotTitle,list);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnChildAttachStateChangeListener(this);
         mTvTip = findViewById(R.id.tv_tip);
@@ -159,6 +170,14 @@ public class NewsListFragment extends BaseFragment implements RecyclerView.OnChi
         ToastUtil.showToast("position = "+position);
     }
 
+    public int getKey() {
+        return key;
+    }
+
+    public void setKey(int key) {
+        this.key = key;
+    }
+
     public ArrayList<New> getHotTitle(){
         final ArrayList<New> rlist = new ArrayList<New>();
         //向服务器请求数据
@@ -190,6 +209,60 @@ public class NewsListFragment extends BaseFragment implements RecyclerView.OnChi
                 New aNew=new New();
                 aNew.setTitle(title);
                 rlist.add(aNew);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //将耗时的网路请求操作放在一个子线程中操作
+    private ArrayList<New> getDataAsync() {
+        final String url="http://106.14.167.49:8080/news/SelectNews";
+        final ArrayList<New> list = new ArrayList<New>();
+        new Thread(){
+            public void run(){
+                try {
+                    OkHttpClient client = new OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS).build();
+                    RequestBody requestBody = new FormBody.Builder().add("newtype",key+"").build();
+                    Request request = new Request.Builder().url(url).post(requestBody).build();
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            Log.e("kwwl", "onFailure: "+e.toString());
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            parseJsonWithJsonObject(response,list);
+                            Log.i("kwwl","response.boby=="+response.body());
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+        return list;
+    }
+    //用于解析后台的json数据
+    private void parseJsonWithJsonObject(Response response,ArrayList<New> list) throws IOException {
+        final String responseData=response.body().string();
+        try{
+            JSONArray jsonArray=new JSONArray(responseData);
+            for(int i=0;i<jsonArray.length();i++)
+            {
+                JSONObject jsonObject=jsonArray.getJSONObject(i);
+                String account=jsonObject.getString("account");
+                String videourl=jsonObject.getString("videourl");
+                String author = jsonObject.getString("author");
+                String title = jsonObject.getString("title");
+                String dateofpublication = jsonObject.getString("dateofpublication");
+                String text = jsonObject.getString("text");
+                int newtype = jsonObject.getInt("newtype");
+                String img = jsonObject.getString("img");
+                New aNew=new New(account,videourl,author,newtype,title,dateofpublication,text);
+                aNew.setImg(img);
+                list.add(aNew);
             }
         } catch (JSONException e) {
             e.printStackTrace();
