@@ -69,7 +69,7 @@ public class NewsListFragment extends BaseFragment implements RecyclerView.OnChi
         ArrayList<New> hotTitle=getHotTitle();
         ArrayList<New> list = getDataAsync();
         list.add(0,new New());
-        SystemClock.sleep(5000);
+        SystemClock.sleep(2000);
 //        Log.i("kwwl","LIST.SIZE=="+list.size());
 //        for (New n: list) {
 //            Log.i("kwwl","n=="+n.getTitle());
