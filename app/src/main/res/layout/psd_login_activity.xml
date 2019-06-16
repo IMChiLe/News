@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/login_layout"
+        android:id="@+id/psd_login_layout"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center">
@@ -37,6 +37,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:id="@+id/psdName"
+                android:inputType="number"
                 android:layout_marginTop="5dp"
                 android:paddingRight="60dp"
                 android:maxLength="20"

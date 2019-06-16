@@ -33,6 +33,8 @@ dependencies {
     implementation 'com.android.support:cardview-v7:26.1.0'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.google.code.gson:gson:2.7'
+    // https://mvnrepository.com/artifact/com.alibaba/fastjson
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.47'
     compile 'com.github.goka.blurredgridmenu:blurredgridmenu:1.0.2'
     //SmartRefreshLayout
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'

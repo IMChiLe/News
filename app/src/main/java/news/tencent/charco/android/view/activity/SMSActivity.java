@@ -1,21 +1,17 @@
 package news.tencent.charco.android.view.activity;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 
 import news.tencent.charco.android.GetSMS;
-import news.tencent.charco.android.User;
-import news.tencent.charco.android.utils.HttpUtil;
+import news.tencent.charco.android.utils.HttpUtils;
 import okhttp3.Call;
 import okhttp3.Response;
 
 public class SMSActivity {
     public void getCode(String phone){
-        HttpUtil.sendCodeRequest(phone, new okhttp3.Callback() {
+        HttpUtils.sendCodeRequest(phone, new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
@@ -32,7 +28,7 @@ public class SMSActivity {
     }
 
     public void getCodeLogin(String phone,String code){
-        HttpUtil.sendCodeLogin(phone,code, new okhttp3.Callback() {
+        HttpUtils.sendCodeLogin(phone,code, new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 

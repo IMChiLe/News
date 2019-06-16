@@ -9,6 +9,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/loginLayout"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:background="@drawable/login">
@@ -19,17 +20,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"/>
-            <TextView
-                android:layout_below="@+id/logins"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="一键登陆"/>
         </RelativeLayout>
 
 
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/successLoginLayout"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@drawable/login">
+            <TextView
+                android:id="@+id/successName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hello,IMCHIle"
+                android:textColor="@color/black"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
     </LinearLayout>
 
 

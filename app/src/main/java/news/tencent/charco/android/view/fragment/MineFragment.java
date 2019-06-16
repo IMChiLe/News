@@ -1,21 +1,21 @@
 package news.tencent.charco.android.view.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.goka.blurredgridmenu.GridMenuFragment;
 
 import news.tencent.charco.android.R;
 import news.tencent.charco.android.base.BaseFragment;
-import news.tencent.charco.android.utils.HttpUtil;
-import news.tencent.charco.android.view.activity.MainActivity;
-import news.tencent.charco.android.view.activity.SMSActivity;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created 18/7/5 11:09
@@ -40,6 +40,28 @@ public class MineFragment extends BaseFragment {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 1:
+                if(resultCode==RESULT_OK){
+                    if(data.getStringExtra("name") != null){
+                        String name = data.getStringExtra("name");
+                        RelativeLayout relativeLayout = findViewById(R.id.loginLayout);
+                        RelativeLayout successLoginLayout = findViewById(R.id.successLoginLayout);
+                        TextView textView = findViewById(R.id.successName);
+                        if(name != null){
+                            relativeLayout.setVisibility(View.GONE);
+                            successLoginLayout.setVisibility(View.VISIBLE);
+                            textView.setText(name);
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Button login = getActivity().findViewById(R.id.logins);
@@ -48,21 +70,7 @@ public class MineFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(),PsdLoginActivity.class);
-                startActivity(intent);
-            /*new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    SMSActivity.getCode("13609014704");
-                    Looper.prepare();
-                    new Handler().post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getContext(),"发送成功,请注意接收",Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    Looper.loop();
-                }
-            }).start();*/
+                startActivityForResult(intent,1);
             }
         });
     }

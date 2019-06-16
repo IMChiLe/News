@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/login_layout"
+        android:id="@+id/code_login_layout"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:gravity="center">
@@ -36,7 +36,9 @@
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
+                android:inputType="number"
                 android:id="@+id/codeName"
+                android:hint="您的手机号码"
                 android:layout_marginTop="5dp"
                 android:paddingRight="60dp"
                 android:maxLength="20"
@@ -64,7 +66,7 @@
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/usecode_layout"
+            android:id="@+id/code_layout"
             android:layout_below="@id/usename_layout"
             android:layout_marginTop="6dp"
             android:gravity="center" >
@@ -73,6 +75,7 @@
                 android:id="@+id/codePassword"
                 android:layout_width="170dp"
                 android:layout_height="55dp"
+                android:hint="验证码"
                 android:inputType="textPassword"
                 android:maxLength="20"
                 android:paddingLeft="55dp"
@@ -101,7 +104,7 @@
             android:id="@+id/codeLogin"
             android:layout_width="fill_parent"
             android:layout_height="44dp"
-            android:layout_below="@id/usecode_layout"
+            android:layout_below="@id/code_layout"
             android:layout_marginTop="30dp"
             android:background="#ff336699"
             android:textColor="@android:color/white"
@@ -122,6 +125,141 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/codeLogin"
             android:layout_below="@id/codeLogin"
+            android:background="#00000000"
+            android:gravity="left|center_vertical"
+            android:text="注册"
+            android:textSize="16sp"
+            android:visibility="visible" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/psd_login_layout"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/gotoCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="验证码登陆"
+                android:textSize="18dp"
+                android:layout_marginTop="20dp"
+                android:gravity="right"
+                android:textColor="@color/black"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/psd_layout"
+            android:layout_marginTop="75dp"
+            android:gravity="center">
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:id="@+id/psdName"
+                android:inputType="number"
+                android:layout_marginTop="5dp"
+                android:paddingRight="60dp"
+                android:maxLength="20"
+                android:paddingLeft="55dp"/>
+            <ImageView
+                android:layout_width="31dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:layout_gravity="left|center_horizontal"
+                android:src="@drawable/user"
+                android:layout_marginLeft="8dp"
+                android:visibility="visible"/>
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="+62"
+                android:textSize="16sp"
+                android:visibility="invisible"/>
+
+
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/usecode_layout"
+            android:layout_below="@id/psd_layout"
+            android:layout_marginTop="6dp"
+            android:gravity="center" >
+
+            <EditText
+                android:id="@+id/psdPassword"
+                android:layout_width="fill_parent"
+                android:layout_height="55dp"
+                android:inputType="textPassword"
+                android:maxLength="20"
+                android:paddingLeft="55dp"
+                android:paddingRight="60dp" />
+
+            <ImageView
+                android:layout_width="31dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_gravity="left|center_vertical"
+                android:src="@drawable/psd"
+                android:layout_marginLeft="8dp" />
+            <Button
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:id="@+id/bt_pwd_eyes"
+                android:background="@drawable/psd1"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="10dp"
+                />
+            <Button
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:id="@+id/bt_pwd_clear"
+                android:background="@drawable/psd1"
+                android:visibility="invisible"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="33dp"/>
+
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="fill_parent"
+            android:layout_height="44dp"
+            android:layout_below="@id/usecode_layout"
+            android:layout_marginTop="30dp"
+            android:background="#ff336699"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:text="登录" />
+        <Button
+            android:id="@+id/login_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/login"
+            android:layout_below="@id/login"
+            android:background="#00000000"
+            android:text="忘记密码"
+            android:textSize="16sp" />
+        <Button
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/login"
+            android:layout_below="@id/login"
             android:background="#00000000"
             android:gravity="left|center_vertical"
             android:text="注册"
