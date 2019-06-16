@@ -69,7 +69,7 @@ public class MineFragment extends BaseFragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),PsdLoginActivity.class);
+                Intent intent = new Intent(getActivity(),CodeLoginActivity.class);
                 startActivityForResult(intent,1);
             }
         });
