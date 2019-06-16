@@ -38,22 +38,24 @@ public class VideoListAdapter extends BaseQuickAdapter<New,BaseViewHolder> {
         Log.i("kwwl","i=="+helper.getLayoutPosition());
         Log.i("kwwl","videourl=="+item.getVideourl());
         Log.i("kwwl","date=="+item.getDateofpublication());
-        //设置视频
-        JZVideoPlayerStandard videoPlayer = helper.getView(R.id.video_player);
-        videoPlayer.setAllControlsVisiblity(VISIBLE, GONE, VISIBLE, GONE, VISIBLE, VISIBLE, GONE);
-        videoPlayer.setState(JZVideoPlayer.CURRENT_STATE_NORMAL);
-        videoPlayer.resetProgressAndTime();
-        videoPlayer.setUp(  item.getVideourl(),
-        //videoPlayer.setUp("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4",
-                JZVideoPlayer.SCREEN_WINDOW_LIST,item.getTitle());
-        //videoPlayer.thumbImageView.setImageResource(R.drawable.bg_motherland);
-        //videoPlayer.thumbImageView.setImageResource(R.drawable.bg_motherland);
+        if(item.getVideourl()!=""||item.getVideourl()!=null){
+            //设置视频
+            JZVideoPlayerStandard videoPlayer = helper.getView(R.id.video_player);
+            videoPlayer.setAllControlsVisiblity(VISIBLE, GONE, VISIBLE, GONE, VISIBLE, VISIBLE, GONE);
+            videoPlayer.setState(JZVideoPlayer.CURRENT_STATE_NORMAL);
+            videoPlayer.resetProgressAndTime();
+            videoPlayer.setUp(  item.getVideourl(),
+                    //videoPlayer.setUp("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4",
+                    JZVideoPlayer.SCREEN_WINDOW_LIST,item.getTitle());
+            //videoPlayer.thumbImageView.setImageResource(R.drawable.bg_motherland);
+            //videoPlayer.thumbImageView.setImageResource(R.drawable.bg_motherland);
 
-        //设置作者
-        TextView author=helper.getView(R.id.tv_publisher);
-        author.setText(item.getAuthor());
-        //设置日期
-        TextView date=helper.getView(R.id.tv_date);
-        date.setText(Time.CalculateTime(item.getDateofpublication()));
+            //设置作者
+            TextView author=helper.getView(R.id.tv_publisher);
+            author.setText(item.getAuthor());
+            //设置日期
+            TextView date=helper.getView(R.id.tv_date);
+            date.setText(Time.CalculateTime(item.getDateofpublication()));
+        }
     }
 }

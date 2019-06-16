@@ -1,8 +1,10 @@
 package news.tencent.charco.android.view.adapter;
 
+import android.os.SystemClock;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -12,15 +14,30 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
+import news.tencent.charco.android.New;
 import news.tencent.charco.android.R;
 import news.tencent.charco.android.utils.ToastUtil;
 import news.tencent.charco.android.utils.UIUtils;
 import news.tencent.charco.android.widget.HotRefrechHead;
 import news.tencent.charco.android.widget.MyHorizontalRefreshLayout;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import xiao.free.horizontalrefreshlayout.HorizontalRefreshLayout;
 import xiao.free.horizontalrefreshlayout.RefreshCallBack;
 
@@ -66,14 +83,17 @@ public class NewsListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity,B
      * 视频
      */
     public static final int NEWS_VIDEO = 600;
-
+    /**
+     * 用于存储后台返回的热门推送数据
+     */
+    private ArrayList<New> hotlist = new ArrayList<New>();
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.
      *
      * @param data A new list is created out of this one to avoid mutable list
      */
-    public NewsListAdapter(List<MultiItemEntity> data) {
+    public NewsListAdapter(List<MultiItemEntity> data,ArrayList<New> hotlist) {
         super(data);
         addItemType(NEWS_SUBJECT, R.layout.item_news_subject);
         addItemType(NEWS_SIMPLE_PHOTO, R.layout.item_news_simple_photo);
@@ -82,6 +102,7 @@ public class NewsListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity,B
         addItemType(NEWS_VIDEO, R.layout.item_news_video);
         addItemType(NEWS_HOT_LIST, R.layout.item_news_hot_list);
         addItemType(NEWS_HOT_TEXT, R.layout.item_hot_text_srcoll);
+        this.hotlist=hotlist;
     }
 
     @Override
@@ -114,15 +135,23 @@ public class NewsListAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity,B
             if (viewFlipper.getChildCount() > 0){
                 viewFlipper.removeAllViews();
             }
-            String[] array = UIUtils.getContext().getResources().getStringArray(R.array.hot);
-                for (String string : array){
-                    TextView textView = (TextView) View.inflate(mContext,R.layout.item_hot_flipper,null);
-                    textView.setText(string);
-                    textView.setTag(string);
-                    textView.setOnClickListener(this);
-                    viewFlipper.addView(textView);
+//            String[] array = UIUtils.getContext().getResources().getStringArray(R.array.hot);
+//                for (String string : array){
+//                    TextView textView = (TextView) View.inflate(mContext,R.layout.item_hot_flipper,null);
+//                    textView.setText(string);
+//                    textView.setTag(string);
+//                    textView.setOnClickListener(this);
+//                    viewFlipper.addView(textView);
+//            }
+            for(New n : hotlist){
+                TextView textView = (TextView) View.inflate(mContext,R.layout.item_hot_flipper,null);
+//                Log.i("kwwl","Title=="+n.getTitle());
+                textView.setText(n.getTitle());
+                textView.setTag(n.getTitle());
+                viewFlipper.addView(textView);
             }
-            viewFlipper.startFlipping();
+
+
 
         }
     }
