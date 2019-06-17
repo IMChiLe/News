@@ -36,7 +36,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.fragment.PsdLoginActivity" />
-        <activity android:name=".view.fragment.CodeLoginActivity"></activity>
+        <activity android:name=".view.fragment.CodeLoginActivity" />
+        <activity android:name=".view.activity.RegisterActivity"></activity>
     </application>
 
 </manifest>

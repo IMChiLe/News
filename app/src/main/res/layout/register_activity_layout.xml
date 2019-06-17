@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="news.tencent.charco.android.view.activity.RegisterActivity">
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/register_gotoLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="登录"
+            android:textSize="20dp"/>
+        <EditText
+            android:drawableLeft="@android:drawable/ic_menu_myplaces"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="40dp"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/regName"
+            android:layout_alignParentTop="true"
+            android:hint="请输入您的用户名"
+            android:layout_alignLeft="@+id/regPhone"
+            android:layout_alignStart="@+id/regPhone"
+            android:layout_alignRight="@+id/regPhone"
+            android:layout_alignEnd="@+id/regPhone" />
+
+        <EditText
+            android:drawableLeft="@android:drawable/ic_lock_idle_lock"
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/regPsd"
+            android:hint="请输入您的密码"
+            android:layout_below="@+id/regName"
+            android:layout_alignRight="@+id/regName"
+            android:layout_alignEnd="@+id/regName"
+            android:layout_alignLeft="@+id/regName"
+            android:layout_alignStart="@+id/regName" />
+
+        <EditText
+            android:drawableLeft="@android:drawable/ic_lock_idle_alarm"
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/regPhone"
+            android:layout_below="@+id/regPsd"
+            android:layout_centerHorizontal="true"
+            android:hint="请确认您的手机号码" />
+
+        <RadioGroup
+            android:id="@+id/sex"
+            android:layout_below="@+id/regPhone"
+            android:layout_alignLeft="@+id/regPhone"
+            android:layout_alignStart="@+id/regPhone"
+            android:layout_marginLeft="5dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="性别:"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/man"
+                android:text="男"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/men"
+                android:text="女"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RadioGroup>
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="取消"
+            android:id="@+id/register_btn_cancel"
+            android:textSize="20dp"
+            android:layout_below="@+id/reg_submit"
+            android:layout_alignLeft="@+id/reg_submit"
+            android:layout_alignStart="@+id/reg_submit"
+            android:layout_marginTop="10dp" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="注册"
+            android:id="@+id/reg_submit"
+            android:textSize="20dp"
+            android:layout_below="@+id/sex"
+            android:layout_alignLeft="@+id/sex"
+            android:layout_alignStart="@+id/sex"
+            android:layout_marginTop="20dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_centerInParent="true"
+            android:layout_width="80sp"
+            android:layout_height="80sp"
+            android:src="@drawable/news"/>
+    </RelativeLayout>
+</LinearLayout>

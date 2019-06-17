@@ -27,6 +27,7 @@ import news.tencent.charco.android.R;
 import news.tencent.charco.android.User;
 import news.tencent.charco.android.utils.HttpUtil;
 import news.tencent.charco.android.view.activity.MainActivity;
+import news.tencent.charco.android.view.activity.RegisterActivity;
 
 import static news.tencent.charco.android.NewsApplication.getContext;
 
@@ -41,6 +42,8 @@ public class CodeLoginActivity extends AppCompatActivity {
     private EditText psdName;
     private EditText psdPassword;
     private Button login;
+    private Button codeRegister;
+    private Button loginRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +71,27 @@ public class CodeLoginActivity extends AppCompatActivity {
             }
         });
 
+        codeRegister = findViewById(R.id.codeRegister);
+        loginRegister = findViewById(R.id.loginRegister);
+
+        codeRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CodeLoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        loginRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CodeLoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         time = new TimeCount(60000, 1000);
         btnGetcode=(Button) findViewById(R.id.getCode);
         codeName = findViewById(R.id.codeName);
@@ -77,6 +101,8 @@ public class CodeLoginActivity extends AppCompatActivity {
         psdName = findViewById(R.id.psdName);
         psdPassword = findViewById(R.id.psdPassword);
         login = findViewById(R.id.login);
+        codeRegister = findViewById(R.id.codeRegister);
+        loginRegister = findViewById(R.id.loginRegister);
 
 
         btnGetcode.setOnClickListener(new View.OnClickListener() {
@@ -281,6 +307,10 @@ public class CodeLoginActivity extends AppCompatActivity {
                     }
                     if(psdName.length() != 11){
                         Toast.makeText(getContext(),"手机号码长度有误",Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    if(!isNetworkAvalible(NewsApplication.getContext())){
+                        Toast.makeText(getContext(),"网络异常",Toast.LENGTH_LONG).show();
                         return;
                     }
                     new Thread(new Runnable() {
