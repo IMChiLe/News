@@ -85,8 +85,12 @@ public class NewsFragment extends BaseFragment implements View.OnClickListener, 
     protected void loadData() {
         channels = getResources().getStringArray(R.array.channel);
         initIndicator();
+        int key = 0;
         for (String channel : channels){
-            fragments.add(new NewsListFragment());
+            NewsListFragment f=new NewsListFragment();
+            f.setKey(key);
+            fragments.add(f);
+            key++;
         }
         mViewPager.setAdapter(new BaseFragmentAdapter(fragments,getChildFragmentManager()));
     }

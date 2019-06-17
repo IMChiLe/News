@@ -123,8 +123,10 @@ public class VideoListFragment extends BaseFragment implements RecyclerView.OnCh
                 String title = jsonObject.getString("title");
                 String dateofpublication = jsonObject.getString("dateofpublication");
                 String text = jsonObject.getString("text");
+                String img = jsonObject.getString("img");
                 int newtype = jsonObject.getInt("newtype");
                 New aNew=new New(account,videourl,author,newtype,title,dateofpublication,text);
+                aNew.setImg(img);
                 list.add(aNew);
             }
         } catch (JSONException e) {
