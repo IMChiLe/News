@@ -89,12 +89,12 @@ public class RecommendListAdapter_3 extends BaseMultiItemQuickAdapter<MultiItemE
                 break;
             case RECOMMENDS_VIDEO:
                 JZVideoPlayerStandard videoPlayer = helper.getView(R.id.video_player);
-                videoPlayer.setAllControlsVisiblity(GONE, GONE, VISIBLE, GONE, VISIBLE, VISIBLE, GONE);
-                videoPlayer.setState(JZVideoPlayer.CURRENT_STATE_NORMAL);
-                videoPlayer.resetProgressAndTime();
-                videoPlayer.setUp("http://vfx.mtime.cn/Video/2019/03/19/mp4/190319104618910544.mp4",
-                        JZVideoPlayer.SCREEN_WINDOW_LIST,"视频标题");
-                videoPlayer.thumbImageView.setImageResource(R.drawable.bg_huawei);
+//                videoPlayer.setAllControlsVisiblity(GONE, GONE, VISIBLE, GONE, VISIBLE, VISIBLE, GONE);
+//                videoPlayer.setState(JZVideoPlayer.CURRENT_STATE_NORMAL);
+//                videoPlayer.resetProgressAndTime();
+//                videoPlayer.setUp("https://gss3.baidu.com/6LZ0ej3k1Qd3ote6lo7D0j9wehsv/tieba-smallvideo-spider/7042402_eb0c2ab3dc960772188c3ff0f35324b0.mp4",
+//                        JZVideoPlayer.SCREEN_WINDOW_LIST,"视频标题");
+//                videoPlayer.thumbImageView.setImageResource(R.drawable.bg_huawei);
                 break;
 //            case RECOMMENDS_HOT_TEXT:
 //                setScrollText(helper);
@@ -128,7 +128,7 @@ public class RecommendListAdapter_3 extends BaseMultiItemQuickAdapter<MultiItemE
     public int getItemViewType(int position) {
         switch (position % 7){
             case 0:
-                return RECOMMENDS_SUBJECT;
+                return RECOMMENDS_VIDEO;
             case 1:
                 return RECOMMENDS_SIMPLE_PHOTO;
 //            case 2:

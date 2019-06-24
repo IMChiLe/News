@@ -41,9 +41,6 @@ public class RecommendListFragment extends BaseFragment implements RecyclerView.
     private SmartRefreshLayout mSmartRefreshLayout;
     private TextView mTvTip;
     private RecommendListAdapter mAdapter_1;
-
-
-
     private int key=0;
 
     public static RecommendListFragment newInstance(Bundle args) {

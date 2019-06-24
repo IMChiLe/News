@@ -18,7 +18,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:src="@drawable/four"/>
+            android:src="@drawable/picture_1"/>
 
         <LinearLayout
             android:layout_width="20dp"
@@ -31,14 +31,14 @@
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:text="luyao"
+                android:text="史森明"
                 android:textSize="20dp"/>
 
             <TextView
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:text="这只是测试的一段标题"
+                android:text="英雄联盟职业联赛RNG战队辅助"
                 android:textSize="20dp"/>
 
         </LinearLayout>
@@ -53,7 +53,7 @@
             android:id="@+id/text_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="666666666666666666666"
+            android:text="这波不亏，应该没什么大问题。这波不亏，应该没什么大问题。这波不亏，应该没什么大问题。"
             android:textSize="22dp"
             android:textColor="@color/color_68228B"
             />
@@ -115,7 +115,7 @@
             android:id="@+id/recommend_1"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/four"
+            android:src="@drawable/recommend_1"
             android:textColor="@color/news_resource"/>
         <TextView
             android:id="@+id/recommend_1_num"
@@ -131,14 +131,14 @@
             android:layout_marginLeft="40dp"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/four"
+            android:src="@drawable/greate_1"
             android:textColor="@color/text_grey"/>
 
         <TextView
             android:id="@+id/greate_1_num"
             android:layout_marginTop="4dp"
             android:layout_marginLeft="5dp"
-            android:text="666"
+            android:text="999"
             android:textSize="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -148,7 +148,7 @@
             android:layout_marginLeft="40dp"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/four"
+            android:src="@drawable/comment_1"
             android:textColor="@color/text_grey"/>
 
         <TextView
@@ -188,7 +188,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:src="@drawable/four"/>
+            android:src="@drawable/picture_1"/>
 
         <LinearLayout
             android:layout_width="20dp"
@@ -201,14 +201,14 @@
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:text="luyao"
+                android:text="小虎"
                 android:textSize="20dp"/>
 
             <TextView
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:text="这只是测试的一段标题"
+                android:text="英雄联盟职业联赛RNG战队中单"
                 android:textSize="20dp"/>
 
         </LinearLayout>
@@ -223,7 +223,7 @@
             android:id="@+id/text_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="666666666666666666666"
+            android:text="翻过这座山，我们一杠三。翻过这座山，我们一杠三。翻过这座山，我们一杠三。翻过这座山，我们一杠三。翻过这座山，我们一杠三。"
             android:textSize="22dp"
             android:textColor="@color/color_68228B"
             />
@@ -285,7 +285,7 @@
             android:id="@+id/recommend_2"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/four"
+            android:src="@drawable/recommend_1"
             android:textColor="@color/news_resource"/>
 
         <TextView
@@ -302,13 +302,13 @@
             android:layout_marginLeft="40dp"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/four"
+            android:src="@drawable/greate_1"
             android:textColor="@color/text_grey"/>
         <TextView
             android:id="@+id/greate_2_num"
             android:layout_marginTop="4dp"
             android:layout_marginLeft="5dp"
-            android:text="666"
+            android:text="123"
             android:textSize="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -318,13 +318,13 @@
             android:layout_marginLeft="40dp"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/four"
+            android:src="@drawable/comment_1"
             android:textColor="@color/text_grey"/>
         <TextView
             android:id="@+id/comment_2_num"
             android:layout_marginTop="4dp"
             android:layout_marginLeft="5dp"
-            android:text="666"
+            android:text="555"
             android:textSize="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -354,7 +354,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:src="@drawable/four"/>
+            android:src="@drawable/picture_1"/>
 
         <LinearLayout
             android:layout_width="20dp"
@@ -368,14 +368,14 @@
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:text="luyao"
+                android:text="简自豪"
                 android:textSize="20dp" />
 
             <TextView
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:text="这只是测试的一段标题"
+                android:text="英雄联盟职业联赛RNG战队ADC"
                 android:textSize="20dp"/>
 
         </LinearLayout>
@@ -390,7 +390,7 @@
             android:id="@+id/text_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="666666666666666666666"
+            android:text="无畏造八强！！"
             android:textSize="22dp"
             android:textColor="@color/color_68228B"
             />
@@ -452,14 +452,14 @@
             android:id="@+id/recommend_3"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/four"
+            android:src="@drawable/recommend_1"
             android:textColor="@color/news_resource"/>
 
         <TextView
             android:id="@+id/recommend_3_num"
             android:layout_marginTop="4dp"
             android:layout_marginLeft="5dp"
-            android:text="666"
+            android:text="123"
             android:textSize="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -469,13 +469,13 @@
             android:layout_marginLeft="40dp"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/four"
+            android:src="@drawable/greate_1"
             android:textColor="@color/text_grey"/>
         <TextView
             android:id="@+id/greate_3_num"
             android:layout_marginTop="4dp"
             android:layout_marginLeft="5dp"
-            android:text="666"
+            android:text="887"
             android:textSize="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -485,7 +485,7 @@
             android:layout_marginLeft="40dp"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/four"
+            android:src="@drawable/comment_1"
             android:textColor="@color/text_grey"/>
         <TextView
             android:id="@+id/comment_3_num"

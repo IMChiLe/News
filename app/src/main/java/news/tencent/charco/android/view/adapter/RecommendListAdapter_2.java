@@ -12,11 +12,14 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
+import news.tencent.charco.android.New;
 import news.tencent.charco.android.R;
+import news.tencent.charco.android.entity.Recommend;
 import news.tencent.charco.android.utils.ToastUtil;
 import news.tencent.charco.android.utils.UIUtils;
 import news.tencent.charco.android.widget.HotRefrechHead;
@@ -63,6 +66,14 @@ public class RecommendListAdapter_2 extends BaseMultiItemQuickAdapter<MultiItemE
      * 视频
      */
     public static final int RECOMMENDS_VIDEO = 600;
+    /**
+     * 用于存储后台返回的热门推送数据
+     */
+    private ArrayList<Recommend> hotlist = new ArrayList<Recommend>();
+    /**
+     * 用于存储后台返回的数据
+     */
+    private ArrayList<Recommend> datas = new ArrayList<Recommend>();
 
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
@@ -70,7 +81,7 @@ public class RecommendListAdapter_2 extends BaseMultiItemQuickAdapter<MultiItemE
      *
      * @param data A new list is created out of this one to avoid mutable list
      */
-    public RecommendListAdapter_2(List<MultiItemEntity> data) {
+    public RecommendListAdapter_2(List<MultiItemEntity> data, ArrayList<Recommend> recommendArrayList, ArrayList<Recommend> datas) {
         super(data);
         addItemType(RECOMMENDS_SUBJECT, R.layout.item_recommend_subject);
         addItemType(RECOMMENDS_SIMPLE_PHOTO, R.layout.item_news_simple_photo);
@@ -80,6 +91,10 @@ public class RecommendListAdapter_2 extends BaseMultiItemQuickAdapter<MultiItemE
         addItemType(RECOMMENDS_HOT_LIST, R.layout.item_news_hot_list);
         addItemType(RECOMMENDS_HOT_TEXT, R.layout.item_hot_text_srcoll);
     }
+
+//    public RecommendListAdapter_2(List<Recommend> recommendArrayList) {
+//        super(recommendArrayList);
+//    }
 
     @Override
     protected void convert(BaseViewHolder helper, MultiItemEntity item) {
@@ -92,7 +107,8 @@ public class RecommendListAdapter_2 extends BaseMultiItemQuickAdapter<MultiItemE
                 videoPlayer.setAllControlsVisiblity(GONE, GONE, VISIBLE, GONE, VISIBLE, VISIBLE, GONE);
                 videoPlayer.setState(JZVideoPlayer.CURRENT_STATE_NORMAL);
                 videoPlayer.resetProgressAndTime();
-                videoPlayer.setUp("http://vfx.mtime.cn/Video/2019/03/19/mp4/190319104618910544.mp4",
+                videoPlayer.setUp
+                        ("https://gss3.baidu.com/6LZ0ej3k1Qd3ote6lo7D0j9wehsv/tieba-smallvideo-spider/7042402_eb0c2ab3dc960772188c3ff0f35324b0.mp4",
                         JZVideoPlayer.SCREEN_WINDOW_LIST,"视频标题");
                 videoPlayer.thumbImageView.setImageResource(R.drawable.bg_huawei);
                 break;
@@ -128,9 +144,17 @@ public class RecommendListAdapter_2 extends BaseMultiItemQuickAdapter<MultiItemE
     public int getItemViewType(int position) {
         switch (position % 7){
             case 0:
-                return RECOMMENDS_SUBJECT;
-            case 1:
-                return RECOMMENDS_HOT_LIST;
+                return RECOMMENDS_VIDEO;
+//            case 1:
+//                return RECOMMENDS_VIDEO;
+//            case 2:
+//                return RECOMMENDS_VIDEO;
+//            case 3:
+//                return RECOMMENDS_VIDEO;
+//            case 4:
+//                return RECOMMENDS_VIDEO;
+//            case 1:
+//                return RECOMMENDS_HOT_LIST;
 //            case 2:
 //                return RECOMMENDS_HOT_TEXT;
 //            case 3:

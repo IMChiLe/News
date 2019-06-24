@@ -90,7 +90,7 @@
         android:id="@+id/iv_simple"
         android:layout_alignParentRight="true"
         android:layout_marginTop="3dp"
-        android:src="@drawable/bg_motherland"
+        android:src="@drawable/bg_huawei"
         android:scaleType="centerCrop"
         android:layout_width="115dp"
         android:layout_height="82dp"/>

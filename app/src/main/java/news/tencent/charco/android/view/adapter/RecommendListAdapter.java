@@ -12,11 +12,13 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
 import news.tencent.charco.android.R;
+import news.tencent.charco.android.entity.Recommend;
 import news.tencent.charco.android.utils.ToastUtil;
 import news.tencent.charco.android.utils.UIUtils;
 import news.tencent.charco.android.widget.HotRefrechHead;
@@ -92,7 +94,7 @@ public class RecommendListAdapter extends BaseMultiItemQuickAdapter<MultiItemEnt
                 videoPlayer.setAllControlsVisiblity(GONE, GONE, VISIBLE, GONE, VISIBLE, VISIBLE, GONE);
                 videoPlayer.setState(JZVideoPlayer.CURRENT_STATE_NORMAL);
                 videoPlayer.resetProgressAndTime();
-                videoPlayer.setUp("http://vfx.mtime.cn/Video/2019/03/19/mp4/190319104618910544.mp4",
+                videoPlayer.setUp("",
                         JZVideoPlayer.SCREEN_WINDOW_LIST,"视频标题");
                 videoPlayer.thumbImageView.setImageResource(R.drawable.bg_huawei);
                 break;

@@ -4,26 +4,47 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import cn.jzvd.JZMediaManager;
 import cn.jzvd.JZUtils;
 import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerManager;
+import news.tencent.charco.android.New;
 import news.tencent.charco.android.R;
 import news.tencent.charco.android.base.BaseFragment;
+import news.tencent.charco.android.entity.Recommend;
 import news.tencent.charco.android.utils.AnimationUtil;
 import news.tencent.charco.android.utils.ToastUtil;
 import news.tencent.charco.android.view.activity.AlbumActivity;
 import news.tencent.charco.android.view.activity.WebViewActivity;
 import news.tencent.charco.android.view.adapter.RecommendListAdapter_2;
 import news.tencent.charco.android.widget.popup.LoseInterestPopup;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * @CreateDate: 2019/6/14 17:08
@@ -41,6 +62,7 @@ public class RecommendListFragment_2 extends BaseFragment implements RecyclerVie
     private SmartRefreshLayout mSmartRefreshLayout;
     private TextView mTvTip;
     private RecommendListAdapter_2 mAdapter_1;
+    private TextView textView;
 
 
 
@@ -65,13 +87,18 @@ public class RecommendListFragment_2 extends BaseFragment implements RecyclerVie
     }
 
     public void initView(View rootView) {
+        ArrayList<Recommend> recommendArrayList = getHotTitle();
+        ArrayList<Recommend> list = getDataAsync();
+        list.add(0,new Recommend());
+
+
         mSmartRefreshLayout = findViewById(R.id.refreshLayout);
         mSmartRefreshLayout.setOnRefreshListener(this);
         mSmartRefreshLayout.setEnableOverScrollBounce(false);//是否启用越界回弹
         mSmartRefreshLayout.setEnableOverScrollDrag(false);
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
-        mAdapter_1 = new RecommendListAdapter_2(null);
+        mAdapter_1 = new RecommendListAdapter_2(null, recommendArrayList, list);
         mRecyclerView.setAdapter(mAdapter_1);
         mRecyclerView.addOnChildAttachStateChangeListener(this);
         mTvTip = findViewById(R.id.tv_tip);
@@ -83,7 +110,6 @@ public class RecommendListFragment_2 extends BaseFragment implements RecyclerVie
     }
 
     protected void loadData() {
-
     }
 
     @Override
@@ -157,5 +183,92 @@ public class RecommendListFragment_2 extends BaseFragment implements RecyclerVie
     @Override
     public void onLoseInterestListener(int poor_quality, int repeat, String source, int position) {
         ToastUtil.showToast("position = "+position);
+    }
+
+    public ArrayList<Recommend> getHotTitle(){
+        final ArrayList<Recommend> rlist = new ArrayList<Recommend>();
+        //向服务器请求数据
+        //final String path="http://10.0.2.2:8080/SelectNewTypeZero";
+        final String path="http://10.0.2.2:8080/recommends";
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder().url(path).build();
+                    Response response=client.newCall(request).execute();
+                    parseJsonWithJsonObjectWithReMen(response,rlist);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        return rlist;
+    }
+
+    public void parseJsonWithJsonObjectWithReMen(Response response,ArrayList<Recommend> rlist) throws IOException {
+        String responseData=response.body().string();
+        try{
+            JSONArray jsonArray=new JSONArray(responseData);
+            for(int i=0;i<jsonArray.length();i++)
+            {
+                JSONObject jsonObject=jsonArray.getJSONObject(i);
+                String url = jsonObject.getString("url");
+                Recommend recommend = new Recommend();
+                recommend.setUrl(url);
+                rlist.add(recommend);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //将耗时的网路请求操作放在一个子线程中操作
+    private ArrayList<Recommend> getDataAsync() {
+        final String url="http://10.0.2.2:8080/recommends";
+        final ArrayList<Recommend> list = new ArrayList<Recommend>();
+        new Thread(){
+            public void run(){
+                try {
+                    OkHttpClient client = new OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS).build();
+                    RequestBody requestBody = new FormBody.Builder().add("id",key+"").build();
+                    Request request = new Request.Builder().url(url).post(requestBody).build();
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            Log.e("kwwl", "onFailure: "+e.toString());
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+//                            parseJsonWithJsonObject(response,list);
+                            parseJsonWithJsonObject(response, list);
+                            Log.i("kwwl","response.boby=="+response.body());
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+        return list;
+    }
+
+    //用于解析后台的json数据
+    private void parseJsonWithJsonObject(Response response,ArrayList<Recommend> list) throws IOException {
+        final String responseData=response.body().string();
+        try{
+            JSONArray jsonArray=new JSONArray(responseData);
+            for(int i=0;i<jsonArray.length();i++)
+            {
+                JSONObject jsonObject=jsonArray.getJSONObject(i);
+                String id=jsonObject.getString("id");
+                String url=jsonObject.getString("url");
+                Recommend recommend = new Recommend(id, url);
+                list.add(recommend);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

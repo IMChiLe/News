@@ -24,7 +24,7 @@
 
         <ImageView
             android:id="@+id/image1"
-            android:src="@drawable/bg_motherland"
+            android:src="@drawable/bg_huawei"
             android:scaleType="centerCrop"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -33,7 +33,7 @@
         <ImageView
             android:id="@+id/image2"
             android:layout_marginLeft="3dp"
-            android:src="@drawable/bg_motherland"
+            android:src="@drawable/bg_huawei"
             android:scaleType="centerCrop"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -42,7 +42,7 @@
         <ImageView
             android:id="@+id/image3"
             android:layout_marginLeft="3dp"
-            android:src="@drawable/bg_motherland"
+            android:src="@drawable/bg_huawei"
             android:scaleType="centerCrop"
             android:layout_weight="1"
             android:layout_width="0dp"
