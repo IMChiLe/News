@@ -28,6 +28,7 @@ import news.tencent.charco.android.User;
 import news.tencent.charco.android.utils.HttpUtil;
 import news.tencent.charco.android.view.activity.MainActivity;
 import news.tencent.charco.android.view.activity.RegisterActivity;
+import news.tencent.charco.android.view.activity.UpdatePsdActivity;
 
 import static news.tencent.charco.android.NewsApplication.getContext;
 
@@ -44,6 +45,8 @@ public class CodeLoginActivity extends AppCompatActivity {
     private Button login;
     private Button codeRegister;
     private Button loginRegister;
+    private TextView login_error;
+    private TextView codeLogin_error;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +60,23 @@ public class CodeLoginActivity extends AppCompatActivity {
                 RelativeLayout psdLayout = findViewById(R.id.psd_login_layout);
                 codeLayout.setVisibility(View.GONE);
                 psdLayout.setVisibility(View.VISIBLE);
+            }
+        });
+
+        login_error = findViewById(R.id.login_error);
+        codeLogin_error = findViewById(R.id.codeLogin_error);
+        login_error.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CodeLoginActivity.this,UpdatePsdActivity.class);
+                startActivity(intent);
+            }
+        });
+        codeLogin_error.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CodeLoginActivity.this,UpdatePsdActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -79,7 +99,6 @@ public class CodeLoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CodeLoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -88,7 +107,6 @@ public class CodeLoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CodeLoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -134,7 +152,7 @@ public class CodeLoginActivity extends AppCompatActivity {
                             map.put("phone",s);
                             key.setMap(map);
                             key.setSessionid("123456");
-                            GetSMS getSMS = HttpUtil.send("http://192.168.0.104:8080/login/getSMS",key);
+                            GetSMS getSMS = HttpUtil.send("http://47.106.112.159:8080/android/login/getSMS",key);
                             System.out.println("----------------" + getSMS.getMessage());
                             if(getSMS.getMessage().equals("noPhone")){
                                 handler.post(new Runnable() {
@@ -225,7 +243,7 @@ public class CodeLoginActivity extends AppCompatActivity {
                             map.put("code",code);
                             key.setMap(map);
                             key.setSessionid("123456");
-                            final GetSMS getSMS = HttpUtil.send("http://192.168.0.104:8080/login/codeLogin",key);
+                            final GetSMS getSMS = HttpUtil.send("http://47.106.112.159:8080/android/login/codeLogin",key);
                             System.out.println("----------------" + getSMS.getMessage());
                             if(getSMS.getMessage().equals("noCode")){
                                 handler.post(new Runnable() {
@@ -322,7 +340,7 @@ public class CodeLoginActivity extends AppCompatActivity {
                             map.put("password",password);
                             key.setSessionid("11111111");
                             key.setMap(map);
-                            final GetSMS getSMS = HttpUtil.send("http://192.168.0.104:8080/login/psdLogin",key);
+                            final GetSMS getSMS = HttpUtil.send("http://47.106.112.159:8080/android/login/psdLogin",key);
                             System.out.println("--------------"+getSMS.getMessage());
                             if(getSMS.getMessage().equals("noPhone")){
                                 handler.post(new Runnable() {
@@ -349,7 +367,7 @@ public class CodeLoginActivity extends AppCompatActivity {
                                         Toast.makeText(getContext(),"登录成功",Toast.LENGTH_LONG).show();
                                         SharedPreferences.Editor editor = getSharedPreferences("data",MODE_PRIVATE).edit();
                                         User user1 = getSMS.getUser();
-                                        editor.putString("phone",user1.getName());
+                                        editor.putString("phone",user1.getPhone());
                                         editor.putString("name",user1.getName());
                                         editor.apply();
 

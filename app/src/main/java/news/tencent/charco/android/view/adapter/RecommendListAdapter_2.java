@@ -1,3 +1,4 @@
+/*
 package news.tencent.charco.android.view.adapter;
 
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,57 +31,79 @@ import xiao.free.horizontalrefreshlayout.RefreshCallBack;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+*/
 /**
  * @CreateDate: 2019/6/17 21:06
  * @ClassName: RecommendListAdapter
  * @Author: Lunatic Princess
  * @Descriptions: $description
- */
+ *//*
+
 public class RecommendListAdapter_2 extends BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder> implements View.OnClickListener {
 
-    /**
+    */
+/**
      * 专题
-     */
+     *//*
+
     public static final int RECOMMENDS_SUBJECT = 100;
-    /**
+    */
+/**
      * 热点列表,可横向滚动
-     */
+     *//*
+
     public static final int RECOMMENDS_HOT_LIST = 200;
-    /**
+    */
+/**
      * 热点列表,纯文字滚动
-     */
+     *//*
+
     public static final int RECOMMENDS_HOT_TEXT = 201;
-    /**
+    */
+/**
      * 单图右侧小图布局(1.小图新闻；2.视频类型，右下角显示视频时长)
-     */
+     *//*
+
     public static final int  RECOMMENDS_SIMPLE_PHOTO = 300;
-    /**
+    */
+/**
      * 三张图片布局(文章、广告)
-     */
+     *//*
+
     public static final int RECOMMENDS_THREE_PHOTO = 400;
-    /**
+    */
+/**
      * 图集
-     */
+     *//*
+
     public static final int RECOMMENDS_ALBUM_PHOTO = 500;
-    /**
+    */
+/**
      * 视频
-     */
+     *//*
+
     public static final int RECOMMENDS_VIDEO = 600;
-    /**
+    */
+/**
      * 用于存储后台返回的热门推送数据
-     */
+     *//*
+
     private ArrayList<Recommend> hotlist = new ArrayList<Recommend>();
-    /**
+    */
+/**
      * 用于存储后台返回的数据
-     */
+     *//*
+
     private ArrayList<Recommend> datas = new ArrayList<Recommend>();
 
-    /**
+    */
+/**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.
      *
      * @param data A new list is created out of this one to avoid mutable list
-     */
+     *//*
+
     public RecommendListAdapter_2(List<MultiItemEntity> data, ArrayList<Recommend> recommendArrayList, ArrayList<Recommend> datas) {
         super(data);
         addItemType(RECOMMENDS_SUBJECT, R.layout.item_recommend_subject);
@@ -221,3 +244,4 @@ public class RecommendListAdapter_2 extends BaseMultiItemQuickAdapter<MultiItemE
         }
     }
 }
+*/

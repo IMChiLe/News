@@ -1,3 +1,4 @@
+/*
 package news.tencent.charco.android.view.fragment;
 
 import android.content.Intent;
@@ -46,12 +47,14 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+*/
 /**
  * @CreateDate: 2019/6/14 17:08
  * @ClassName: RecommendListFragment
  * @Author: Lunatic Princess
  * @Descriptions: 碎片链表，在RecommendFragment中实例化进行界面填充
- */
+ *//*
+
 public class RecommendListFragment_2 extends BaseFragment implements RecyclerView.OnChildAttachStateChangeListener,
         OnRefreshListener,
         BaseQuickAdapter.OnItemClickListener,
@@ -272,3 +275,4 @@ public class RecommendListFragment_2 extends BaseFragment implements RecyclerVie
         }
     }
 }
+*/

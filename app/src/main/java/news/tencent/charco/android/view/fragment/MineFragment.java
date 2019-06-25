@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.goka.blurredgridmenu.GridMenuFragment;
 
@@ -16,6 +17,7 @@ import news.tencent.charco.android.R;
 import news.tencent.charco.android.base.BaseFragment;
 
 import static android.app.Activity.RESULT_OK;
+import static news.tencent.charco.android.NewsApplication.getContext;
 
 /**
  * Created 18/7/5 11:09
@@ -50,10 +52,14 @@ public class MineFragment extends BaseFragment {
                         RelativeLayout relativeLayout = findViewById(R.id.loginLayout);
                         RelativeLayout successLoginLayout = findViewById(R.id.successLoginLayout);
                         TextView textView = findViewById(R.id.successName);
+                        TextView idout = findViewById(R.id.idOut);
                         if(name != null){
                             relativeLayout.setVisibility(View.GONE);
                             successLoginLayout.setVisibility(View.VISIBLE);
-                            textView.setText(name);
+                            SharedPreferences preferences = getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
+                            preferences.getString("name",null);
+                            textView.setText(preferences.getString("name",null));
+                            idout.setText("退出(" + preferences.getString("phone",null) + ")");
                         }
                     }
                 }
@@ -71,6 +77,40 @@ public class MineFragment extends BaseFragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(),CodeLoginActivity.class);
                 startActivityForResult(intent,1);
+            }
+        });
+
+        RelativeLayout relativeLayout = findViewById(R.id.loginLayout);
+        RelativeLayout successLoginLayout = findViewById(R.id.successLoginLayout);
+        TextView textView = findViewById(R.id.successName);
+        SharedPreferences preferences = getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
+        String name = preferences.getString("name",null);
+        TextView idout = findViewById(R.id.idOut);
+        if(name != null){
+            relativeLayout.setVisibility(View.GONE);
+            successLoginLayout.setVisibility(View.VISIBLE);
+            textView.setText(name);
+            String phone = preferences.getString("phone",null);
+            idout.setText("退出(" + phone + ")");
+        }
+
+        idout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences preferences = getContext().getSharedPreferences("data",Context.MODE_PRIVATE);
+                String name = preferences.getString("name",null);
+                if(name == null){
+                    Toast.makeText(getContext(),"未进行登录",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                RelativeLayout relativeLayout = findViewById(R.id.loginLayout);
+                RelativeLayout successLoginLayout = findViewById(R.id.successLoginLayout);
+                relativeLayout.setVisibility(View.VISIBLE);
+                successLoginLayout.setVisibility(View.GONE);
+                TextView idout = findViewById(R.id.idOut);
+                idout.setText("退出");
+                Toast.makeText(getContext(),"您已退出登录",Toast.LENGTH_LONG).show();
+                preferences.edit().clear().apply();
             }
         });
     }
