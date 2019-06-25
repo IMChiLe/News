@@ -18,7 +18,6 @@ import java.util.List;
 import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
 import news.tencent.charco.android.R;
-import news.tencent.charco.android.entity.Recommend;
 import news.tencent.charco.android.utils.ToastUtil;
 import news.tencent.charco.android.utils.UIUtils;
 import news.tencent.charco.android.widget.HotRefrechHead;

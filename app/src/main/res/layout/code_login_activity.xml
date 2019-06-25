@@ -76,7 +76,7 @@
                 android:layout_width="170dp"
                 android:layout_height="55dp"
                 android:hint="验证码"
-                android:inputType="textPassword"
+                android:inputType="number"
                 android:maxLength="20"
                 android:paddingLeft="55dp"
                 android:paddingRight="60dp" />
